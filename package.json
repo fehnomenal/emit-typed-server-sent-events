@@ -1,0 +1,19 @@
+{
+  "name": "typed-server-sent-events",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "format": "prettier -w src",
+    "changeset": "changeset",
+    "version": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.27.1",
+    "@types/bun": "latest",
+    "prettier": "3.2.5",
+    "typescript": "5.4.4"
+  },
+  "files": [
+    "./dist"
+  ]
+}
