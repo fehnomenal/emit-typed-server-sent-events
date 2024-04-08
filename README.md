@@ -30,7 +30,7 @@ bun add 'github:fehnomenal/emit-typed-server-sent-events#semver:v1.0.0'
 
 ```ts
 import { makeSseEmitter } from 'emit-typed-server-sent-events';
-import { EventEmitter } from 'node:events';
+import EventEmitter from 'node:events';
 
 // 1. Create an event emitter (optionally with typed events which I recommend).
 const emitter = new EventEmitter<{
