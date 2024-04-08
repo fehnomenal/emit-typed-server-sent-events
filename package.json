@@ -1,8 +1,14 @@
 {
-  "name": "typed-server-sent-events",
+  "name": "emit-typed-server-sent-events",
   "version": "0.0.0",
   "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "scripts": {
+    "build:code": "bun build --target=node --outdir=dist --minify -e devalue -e @microsoft/fetch-event-source src/index.ts",
+    "build:declarations": "tsc",
+    "build": "rm -rf dist && bun run build:code && bun run build:declarations",
     "format": "prettier -w src",
     "changeset": "changeset",
     "version": "changeset version"
