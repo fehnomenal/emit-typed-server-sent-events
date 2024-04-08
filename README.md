@@ -93,6 +93,12 @@ const sse = listenToEvents<typeof streamEvents>('/endpoint/url', {
     console.log('finished job', id);
   }
 });
+
+// You can await the connection.
+await sse.promise();
+
+// You can abort the event source. This is only available if you didn't pass a `signal` to the `listenToEvents` call.
+sse.abort();
 ```
 
 # Development and publishing
