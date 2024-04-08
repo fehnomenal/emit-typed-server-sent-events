@@ -13,6 +13,10 @@
     "prettier": "3.2.5",
     "typescript": "5.4.4"
   },
+  "peerDependencies": {
+    "@microsoft/fetch-event-source": "^2.0.0",
+    "devalue": "^4.0.0"
+  },
   "files": [
     "./dist"
   ]
