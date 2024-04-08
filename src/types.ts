@@ -12,7 +12,7 @@ export type EventsSwitchMap<
       [E in keyof Events]?: Events[E] extends unknown[] ? EventFilterMap<Events[E]> : never;
     };
 
-export type EventFilterMap<A extends any[] = any[]> = boolean | ((...args: A) => boolean | unknown[]);
+export type EventFilterMap<A extends any[] = any[]> = true | ((...args: A) => boolean | unknown[]);
 
 export type SseEmitter<
   Emitter extends EventEmitter = EventEmitter,
@@ -24,7 +24,7 @@ export type EventHandlers<SE extends SseEmitter> =
     ? Map extends EventsSwitchMap<Emitter, infer Events>
       ? {
           [E in keyof Map as Map[E] extends false ? never : E]?: Listener<
-            Map[E] extends boolean
+            Map[E] extends true
               ? GetKey<E, Events>
               : Map[E] extends (...args: never[]) => unknown
                 ? ReturnsOnlyBoolean<Map[E]> extends true

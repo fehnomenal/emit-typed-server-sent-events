@@ -15,10 +15,6 @@ export const makeSseEmitter =
     const stream = new ReadableStream({
       start(controller) {
         for (const [name, handler] of Object.entries(eventsSwitchMap)) {
-          if (handler === false) {
-            continue;
-          }
-
           const listener = (...args: unknown[]) => {
             let result: boolean | unknown[];
 
