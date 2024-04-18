@@ -7,19 +7,19 @@ This library contains helpers to convert events from a node.js event emitter to 
 Choose the one for your package manager.
 
 ```sh
-npm install 'github:fehnomenal/emit-typed-server-sent-events#semver:v1.0.0'
+npm install 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
 ```
 
 ```sh
-yarn install 'github:fehnomenal/emit-typed-server-sent-events#semver:v1.0.0'
+yarn install 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
 ```
 
 ```sh
-pnpm install 'github:fehnomenal/emit-typed-server-sent-events#semver:v1.0.0'
+pnpm install 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
 ```
 
 ```sh
-bun add 'github:fehnomenal/emit-typed-server-sent-events#semver:v1.0.0'
+bun add 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
 ```
 
 ## Server side
@@ -147,8 +147,9 @@ sse.abort();
 > bun changeset
 > git commit
 > bun version
+> git add -i
+> git commit -m "release ..."
 > bun run build
-> git commit
 > npm2git c
 > git push
 > git push --tags
