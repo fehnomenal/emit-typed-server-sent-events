@@ -1,29 +1,33 @@
 import { fetchEventSource, type FetchEventSourceInit } from '@microsoft/fetch-event-source';
 import { parse } from 'devalue';
-import type { EventHandlers, SseEmitter } from './types.ts';
+import type { EventEmitter } from 'node:events';
+import type { EventStreamer } from './server.ts';
+import type { EventHandlers, EventsSwitchMap } from './types.ts';
 
-export function listenToEvents<Emitter extends SseEmitter>(
+export function listenToEvents<
+  Streamer extends EventStreamer<EventEmitter, never, EventsSwitchMap<never, never>>,
+>(
   url: string,
-  handlers: EventHandlers<Emitter>,
+  handlers: EventHandlers<Streamer>,
   init: { signal: AbortSignal } & Omit<FetchEventSourceInit, 'onmessage'>,
 ): {
   promise: Promise<void>;
 };
 
-export function listenToEvents<Emitter extends SseEmitter>(
+export function listenToEvents<
+  Streamer extends EventStreamer<EventEmitter, never, EventsSwitchMap<never, never>>,
+>(
   url: string,
-  handlers: EventHandlers<Emitter>,
+  handlers: EventHandlers<Streamer>,
   init?: Omit<FetchEventSourceInit, 'onmessage'>,
 ): {
   promise: Promise<void>;
   abort: () => void;
 };
 
-export function listenToEvents<Emitter extends SseEmitter>(
-  url: string,
-  handlers: EventHandlers<Emitter>,
-  init: Omit<FetchEventSourceInit, 'onmessage'> = {},
-) {
+export function listenToEvents<
+  Streamer extends EventStreamer<EventEmitter, never, EventsSwitchMap<never, never>>,
+>(url: string, handlers: EventHandlers<Streamer>, init: Omit<FetchEventSourceInit, 'onmessage'> = {}) {
   let abortController: AbortController | undefined;
   let { signal } = init;
 

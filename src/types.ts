@@ -1,34 +1,39 @@
 import type EventEmitter from 'node:events';
+import type { EventStreamer } from './server.ts';
+
+type EventMap<T> = Record<keyof T, any[]> | DefaultEventMap;
+type DefaultEventMap = [never];
+export type DefaultCtx = [never];
 
 export type EmitterEvents<Emitter extends EventEmitter> =
-  Emitter extends EventEmitter<infer Events> ? Events : [never];
+  Emitter extends EventEmitter<infer Events> ? Events : DefaultEventMap;
 
-export type EventsSwitchMap<
-  Emitter extends EventEmitter,
-  Events extends EmitterEvents<Emitter> = EmitterEvents<Emitter>,
-> = Events extends [never]
-  ? Record<string, EventFilterMap>
+export type DefaultEventSwitchMap = Record<string, EventFilterMap>;
+
+export type EventsSwitchMap<Ctx, Events extends EventMap<unknown>> = [Events] extends [DefaultEventMap]
+  ? DefaultEventSwitchMap
   : {
-      [E in keyof Events]?: Events[E] extends unknown[] ? EventFilterMap<Events[E]> : never;
+      [E in keyof Events]?: Events[E] extends unknown[] ? EventFilterMap<Ctx, Events[E]> : never;
     };
 
-export type EventFilterMap<A extends any[] = any[]> = true | ((...args: A) => boolean | unknown[]);
+export type EventFilterMap<Ctx = DefaultCtx, A extends unknown[] = any[]> =
+  | true
+  | ([Ctx] extends [DefaultCtx]
+      ? (...args: A) => boolean | unknown[]
+      : (...args: [...A, ctx: Ctx]) => boolean | unknown[]);
 
-export type SseEmitter<
-  Emitter extends EventEmitter = EventEmitter,
-  _Map extends EventsSwitchMap<Emitter> = EventsSwitchMap<Emitter>,
-> = () => Response;
-
-export type EventHandlers<SE extends SseEmitter> =
-  SE extends SseEmitter<infer Emitter, infer Map>
-    ? Map extends EventsSwitchMap<Emitter, infer Events>
+export type EventHandlers<
+  Streamer extends EventStreamer<EventEmitter, never, EventsSwitchMap<never, never>>,
+> =
+  Streamer extends EventStreamer<infer Emitter, infer _Ctx, infer Map>
+    ? Map extends DefaultEventSwitchMap
       ? {
-          [E in keyof Map as Map[E] extends false ? never : E]?: Listener<
+          [E in keyof Map]?: Listener<
             Map[E] extends true
-              ? GetKey<E, Events>
+              ? GetKey<E, EmitterEvents<Emitter>>
               : Map[E] extends (...args: never[]) => unknown
                 ? ReturnsOnlyBoolean<Map[E]> extends true
-                  ? GetKey<E, Events>
+                  ? GetKey<E, EmitterEvents<Emitter>>
                   : Exclude<ReturnType<Map[E]>, boolean>
                 : never
           >;
