@@ -144,10 +144,11 @@ sse.abort();
 > bun i
 > # work work work
 > git add ...
-> git commit
 > bun changeset
+> git commit
 > bun version
 > bun run build
+> git commit
 > npm2git c
 > git push
 > git push --tags
