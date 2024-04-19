@@ -42,7 +42,7 @@ export function listenToEvents<
     onmessage({ event: name, data }) {
       const handler = (handlers as Partial<Record<string, (...args: unknown[]) => void>>)[name];
       if (handler) {
-        handler(parse(data));
+        handler(...parse(data));
       }
     },
   });
