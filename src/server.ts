@@ -34,8 +34,7 @@ export class EventStreamer<
     this.#map = map;
   }
 
-  streamEvents(...args: [Ctx] extends [DefaultCtx] ? [] : [ctx: Ctx]) {
-    const [ctx] = args;
+  streamEvents(...[ctx]: [Ctx] extends [DefaultCtx] ? [] : [ctx: Ctx]) {
     const self = this;
 
     let eventListeners: Record<string, (...args: unknown[]) => void> = {};

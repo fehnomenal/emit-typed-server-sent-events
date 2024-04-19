@@ -131,11 +131,11 @@ const sse = listenToEvents<typeof jobStreamer>(
   },
 );
 
-// You can await the connection.
-await sse.promise;
-
 // You can abort the event source. This is only available if you didn't pass a `signal` to the `listenToEvents` call.
 sse.abort();
+
+// You can await the closing of the connection.
+await sse.promise;
 ```
 
 # Development and publishing

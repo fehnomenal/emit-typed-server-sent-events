@@ -28,12 +28,12 @@ export function listenToEvents<
 export function listenToEvents<
   Streamer extends EventStreamer<EventEmitter, never, EventsSwitchMap<never, never>>,
 >(url: string, handlers: EventHandlers<Streamer>, init: Omit<FetchEventSourceInit, 'onmessage'> = {}) {
-  let abortController: AbortController | undefined;
-  let { signal } = init;
+  let aborter: { abort?: () => void } = {};
 
-  if (!signal) {
-    abortController = new AbortController();
-    init.signal = signal;
+  if (!init.signal) {
+    const controller = new AbortController();
+    init.signal = controller.signal;
+    aborter.abort = () => controller.abort();
   }
 
   const promise = fetchEventSource(url, {
@@ -47,8 +47,5 @@ export function listenToEvents<
     },
   });
 
-  return {
-    promise,
-    abort: () => abortController?.abort(),
-  };
+  return Object.assign(aborter, { promise });
 }
