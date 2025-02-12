@@ -1,4 +1,4 @@
-# emit-typed-server-sent-events
+# @fehnomenal/emit-typed-server-sent-events
 
 ## 2.0.1
 

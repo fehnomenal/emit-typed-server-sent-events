@@ -1,6 +1,7 @@
 {
-  "name": "emit-typed-server-sent-events",
+  "name": "@fehnomenal/emit-typed-server-sent-events",
   "version": "2.0.1",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./dist/index.js"
@@ -11,17 +12,23 @@
     "build": "rm -rf dist && bun run build:code && bun run build:declarations",
     "format": "prettier -w src",
     "changeset": "changeset",
-    "version": "changeset version"
+    "version": "changeset version",
+    "release": "bun run build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.1",
     "@types/bun": "latest",
+    "changesets-changelog-clean": "1.3.0",
     "prettier": "3.2.5",
     "typescript": "5.4.4"
   },
   "peerDependencies": {
     "@microsoft/fetch-event-source": "^2.0.0",
     "devalue": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fehnomenal/emit-typed-server-sent-events.git"
   },
   "files": [
     "./dist"
