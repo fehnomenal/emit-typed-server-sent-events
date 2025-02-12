@@ -7,19 +7,19 @@ This library contains helpers to convert events from a node.js event emitter to 
 Choose the one for your package manager.
 
 ```sh
-npm install '@fehnomenal/emit-typed-server-sent-events
+npm install @fehnomenal/emit-typed-server-sent-events
 ```
 
 ```sh
-yarn install '@fehnomenal/emit-typed-server-sent-events
+yarn install @fehnomenal/emit-typed-server-sent-events
 ```
 
 ```sh
-pnpm install '@fehnomenal/emit-typed-server-sent-events
+pnpm install @fehnomenal/emit-typed-server-sent-events
 ```
 
 ```sh
-bun add '@fehnomenal/emit-typed-server-sent-events
+bun add @fehnomenal/emit-typed-server-sent-events
 ```
 
 ## Server side
