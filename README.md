@@ -1,4 +1,4 @@
-# emit-typed-server-sent-events
+# @fehnomenal/emit-typed-server-sent-events
 
 This library contains helpers to convert events from a node.js event emitter to a event stream for [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) and handle them on the client side with type safety (via `@microsoft/fetch-event-source`).
 
@@ -7,19 +7,19 @@ This library contains helpers to convert events from a node.js event emitter to 
 Choose the one for your package manager.
 
 ```sh
-npm install 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
+npm install '@fehnomenal/emit-typed-server-sent-events
 ```
 
 ```sh
-yarn install 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
+yarn install '@fehnomenal/emit-typed-server-sent-events
 ```
 
 ```sh
-pnpm install 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
+pnpm install '@fehnomenal/emit-typed-server-sent-events
 ```
 
 ```sh
-bun add 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
+bun add '@fehnomenal/emit-typed-server-sent-events
 ```
 
 ## Server side
@@ -29,7 +29,7 @@ bun add 'github:fehnomenal/emit-typed-server-sent-events#semver:v2.0.0'
 3. Respond to requests.
 
 ```ts
-import { defineMapFor } from 'emit-typed-server-sent-events';
+import { defineMapFor } from '@fehnomenal/emit-typed-server-sent-events';
 import EventEmitter from 'node:events';
 
 // 1. Create an event emitter (optionally with typed events which I recommend).
@@ -108,7 +108,7 @@ Call `listenToEvents` with the url to your endpoint, a map of event handlers and
 The event handler arguments are typed from the sse emitter.
 
 ```ts
-import { listenToEvents } from 'emit-typed-server-sent-events';
+import { listenToEvents } from '@fehnomenal/emit-typed-server-sent-events';
 import type { jobStreamer } from './server.js';
 
 const sse = listenToEvents<typeof jobStreamer>(
@@ -140,17 +140,19 @@ await sse.promise;
 
 # Development and publishing
 
+## Dev
+
 ```sh
 > bun i
-> # work work work
-> git add ...
+> git switch -c ...
+> # work work work and commit stuff
+> # add a changeset if it is an user-visible change
 > bun changeset
-> git commit
-> bun version
-> git add -i
-> git commit -m "release ..."
-> bun run build
-> npm2git c
+> git add .changeset
+> git commit -m "changeset"
 > git push
-> git push --tags
 ```
+
+## Publish
+
+Publishing is done through the changesets bot and action.
