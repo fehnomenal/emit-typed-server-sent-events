@@ -1,5 +1,12 @@
 # @fehnomenal/emit-typed-server-sent-events
 
+## 3.0.1
+
+### Patch Changes
+
+- Fix installation instructions _[`#3`](https://github.com/fehnomenal/emit-typed-server-sent-events/pull/3) [`e573b38`](https://github.com/fehnomenal/emit-typed-server-sent-events/commit/e573b38121463a89e971b35285ea50106f836735) [@fehnomenal](https://github.com/fehnomenal)_
+- Assign explicit type for typescript 6 compatability _[`#6`](https://github.com/fehnomenal/emit-typed-server-sent-events/pull/6) [`ae6915a`](https://github.com/fehnomenal/emit-typed-server-sent-events/commit/ae6915a7bfa830fa4db867c493d5a300244c8cac) [@fehnomenal](https://github.com/fehnomenal)_
+
 ## 3.0.0
 
 ### Major Changes
