@@ -2,7 +2,7 @@ import { stringify } from 'devalue';
 import type { EventEmitter } from 'node:events';
 import type { DefaultCtx, DefaultEventSwitchMap, EmitterEvents, EventsSwitchMap } from './types.ts';
 
-export const defineMapFor = <Emitter extends EventEmitter>(emitter: Emitter) =>
+export const defineMapFor = <Emitter extends EventEmitter<any>>(emitter: Emitter) =>
   new MapDefiner<Emitter, DefaultCtx>(emitter);
 
 class MapDefiner<Emitter extends EventEmitter, Ctx> {
